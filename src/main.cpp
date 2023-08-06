@@ -64,7 +64,7 @@ void handleDisable(std::vector<std::string>& tokens, std::map<std::string, Cheat
 {
 	if (tokens.size() != 2) return;
 	try {
-		cheats.at(tokens[1])->enable(pid);
+		cheats.at(tokens[1])->disable(pid);
 	} catch (...) {
 		std::cerr << "[ERROR] Failed to disable cheat: " << tokens[1] << std::endl;
 	}
