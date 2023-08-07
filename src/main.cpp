@@ -74,7 +74,7 @@ void handleDisable(std::vector<std::string>& tokens, std::map<std::string, Cheat
 
 int main(int argc, char** argv)
 {
-	unsigned int pid = 0;
+	unsigned int pid = (argc > 1) ? std::stoi(argv[1]) : 0;
 	std::map<std::string, Cheat*> cheats;
 	cheats["invincibility"] = new Invincibility();
 	cheats["lockitemcount"] = new LockItemCount();
