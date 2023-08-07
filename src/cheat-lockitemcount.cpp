@@ -2,53 +2,23 @@
 #include <sys/wait.h>
 
 #include "cheat-lockitemcount.hpp"
+#include "procmemio/procmemio.h"
 
 bool LockItemCount::status(unsigned int pid)
 {
-	const void* addr = (void*)0x14074f295;
-	long long data;
-
-	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) return false;
-	waitpid(pid, (int*)(&data), 0);
-
-	data = ptrace(PTRACE_PEEKDATA, pid, addr, 0);
-	ptrace(PTRACE_DETACH, pid, 0, 0);
-
-	unsigned char* ptr = (unsigned char*)(&data);
-	return (ptr[0] != 0x03) ||
-	       (ptr[1] != 0xc5);
+	unsigned char data[2];
+	procmemio_read(pid, (void*)0x14074f295, data, 2);
+	return ((data[0] != 0x03) || (data[1] != 0xc5));
 }
 
 void LockItemCount::enable(unsigned int pid)
 {
-	const void* addr = (void*)0x14074f295;
-	long long data;
-
-	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) return;
-	waitpid(pid, (int*)(&data), 0);
-
-	data = ptrace(PTRACE_PEEKDATA, pid, addr, 0);
-	unsigned char* ptr = (unsigned char*)(&data);
-	ptr[0] = 0x90;
-	ptr[1] = 0x90;
-
-	ptrace(PTRACE_POKEDATA, pid, addr, data);
-	ptrace(PTRACE_DETACH, pid, 0, 0);
+	const unsigned char data[2] = { 0x90, 0x90 };
+	procmemio_write(pid, (void*)0x14074f295, data, 2);
 };
 
 void LockItemCount::disable(unsigned int pid)
 {
-	const void* addr = (void*)0x14074f295;
-	long long data;
-
-	if (ptrace(PTRACE_ATTACH, pid, 0, 0) == -1) return;
-	waitpid(pid, (int*)(&data), 0);
-
-	data = ptrace(PTRACE_PEEKDATA, pid, addr, 0);
-	unsigned char* ptr = (unsigned char*)(&data);
-	ptr[0] = 0x03;
-	ptr[1] = 0xc5;
-
-	ptrace(PTRACE_POKEDATA, pid, addr, data);
-	ptrace(PTRACE_DETACH, pid, 0, 0);
+	const unsigned char data[2] = { 0x03, 0xc5 };
+	procmemio_write(pid, (void*)0x14074f295, data, 2);
 };

@@ -1,6 +1,6 @@
 dist/dark-souls-remastered-cheats : build/main.o build/cheat-invincibility.o build/cheat-lockitemcount.o build/cheat-lockspellcount.o
 	@mkdir -p dist
-	clang++ -o $@ $^
+	clang++ -o $@ $^ -lprocmemio
 
 build/main.o : src/main.cpp
 	@mkdir -p build
