@@ -9,6 +9,7 @@
 #include "cheat.hpp"
 #include "cheat-invincibility.hpp"
 #include "cheat-lockitemcount.hpp"
+#include "cheat-lockspellcount.hpp"
 
 std::vector<std::string> tokenizeInput(std::string& input)
 {
@@ -77,6 +78,7 @@ int main(int argc, char** argv)
 	std::map<std::string, Cheat*> cheats;
 	cheats["invincibility"] = new Invincibility();
 	cheats["lockitemcount"] = new LockItemCount();
+	cheats["lockspellcount"] = new LockSpellCount();
 	while (true)
 		try {
 			std::cout << "> ";
