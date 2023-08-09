@@ -13,7 +13,7 @@ long long Invincibility::getBase(const unsigned int pid)
 	return regs.rax;
 }
 
-bool Invincibility::status(unsigned int pid)
+bool Invincibility::status(const unsigned int pid)
 {
 	void* addr = (void*)(this->getBase(pid) + 0x524);
 	unsigned char data;
@@ -21,14 +21,14 @@ bool Invincibility::status(unsigned int pid)
 	return (data == 0x40);
 }
 
-void Invincibility::enable(unsigned int pid)
+void Invincibility::enable(const unsigned int pid)
 {
 	void* addr = (void*)(this->getBase(pid) + 0x524);
 	unsigned char data = 0x40;
 	procmemio_write(pid, addr, &data, 1);
 };
 
-void Invincibility::disable(unsigned int pid)
+void Invincibility::disable(const unsigned int pid)
 {
 	void* addr = (void*)(this->getBase(pid) + 0x524);
 	unsigned char data = 0x00;
