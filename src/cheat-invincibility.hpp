@@ -3,7 +3,7 @@
 class Invincibility : public Cheat
 {
 	private:
-		long long base_address = 0;
+		long long getBase(const unsigned int pid);
 	public:
 		Invincibility() {};
 		bool status(unsigned int pid) override;
