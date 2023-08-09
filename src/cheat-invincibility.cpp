@@ -1,7 +1,3 @@
-#include <sys/ptrace.h>
-#include <sys/user.h>
-#include <sys/wait.h>
-
 #include <procmemio/procmemio.h>
 
 #include "cheat-invincibility.hpp"

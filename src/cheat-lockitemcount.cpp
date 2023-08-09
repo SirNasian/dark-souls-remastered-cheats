@@ -1,6 +1,3 @@
-#include <sys/ptrace.h>
-#include <sys/wait.h>
-
 #include <procmemio/procmemio.h>
 
 #include "cheat-lockitemcount.hpp"
