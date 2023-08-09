@@ -1,8 +1,9 @@
 #include <sys/ptrace.h>
 #include <sys/wait.h>
 
+#include <procmemio/procmemio.h>
+
 #include "cheat-lockitemcount.hpp"
-#include "procmemio/procmemio.h"
 
 bool LockItemCount::status(const unsigned int pid)
 {
