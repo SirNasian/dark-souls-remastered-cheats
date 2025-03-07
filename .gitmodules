@@ -1,0 +1,3 @@
+[submodule "submodules/ProcMemIO"]
+	path = submodules/ProcMemIO
+	url = https://github.com/SirNasian/ProcMemIO

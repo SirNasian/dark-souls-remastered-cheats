@@ -2,8 +2,8 @@ cmake_minimum_required(VERSION 3.27.1)
 project(dark-souls-remastered-cheats)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-include_directories(${INCLUDE_PATH})
-link_directories(${LIBRARY_PATH})
+add_subdirectory(submodules/ProcMemIO)
+include_directories(submodules/ProcMemIO/include)
 
 link_libraries(procmemio)
 add_executable(dark-souls-remastered-cheats
